@@ -17,4 +17,11 @@ public abstract class EnemyController : ResettableStateControllerBase
 
     // Get position at which to spawn kill score
     public abstract Vector3 GetKillScorePosition();
+
+    // If collide with other enemies or (invisible) walls, ignore in the future
+    private void OnCollisionStay2D(Collision2D other) {
+        if ((other.gameObject.tag==Utils.enemyTag) || (other.gameObject.tag==Utils.wallTag)) {
+            Physics2D.IgnoreCollision(GetComponent<BoxCollider2D>(),other.collider);
+        }
+    }
 }

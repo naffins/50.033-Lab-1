@@ -95,6 +95,7 @@ public class PlayerController : ResettableStateControllerBase
         ManageSpriteFlip();
     }
 
+    // Movement: move according to whether left arrow and/or right arrow keys are pressed
     void MoveBodyHorizontal() {
 
         // Simulate movement by moving player at each frame
@@ -103,6 +104,7 @@ public class PlayerController : ResettableStateControllerBase
     void OnCollisionEnter2D(Collision2D other)
     {
         // I think we can ignore IsPaused() checking here
+
         // If enter ground's collision box, enable jump and empty list of gombas jumped over
         if (other.gameObject.CompareTag(Utils.groundTag)) {
             canJump = true;
@@ -130,6 +132,7 @@ public class PlayerController : ResettableStateControllerBase
         }
     }
 
+    // If collide with enemy weapons, die
     void OnTriggerEnter2D(Collider2D other) {
         if (IsPaused()) return;
         
@@ -153,6 +156,7 @@ public class PlayerController : ResettableStateControllerBase
         }
     }
     void ManageSpriteFlip() {
+        // Don't sprite flip if Mario isn't even moving
         if (!Utils.IsMovingHorizontal()) return;
 
         // Flip sprite in the direction it is moving, if it is moving
@@ -169,6 +173,7 @@ public class PlayerController : ResettableStateControllerBase
         return rigidBody2D;
     }
 
+    // Add sample goomba to list of goombas that Mario jumped over
     public bool tryAddJumpedOver(SampleGombaController s) {
         return jumpedOverSet.Add(s);
     }

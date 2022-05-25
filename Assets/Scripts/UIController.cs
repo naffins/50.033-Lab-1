@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour
 {
 
+    // Constants indicating game object names
     private const string panelName = "Panel";
     private const string scoreDisplayName = "Score Value";
     private const string buttonName = "Start Button";
@@ -18,8 +19,7 @@ public class UIController : MonoBehaviour
     void Start()
     {
 
-        // Rather than iterating, it's probably much faster to
-        // use GetComponentsInChildren<>(), but meh (though this also returns own component if any)
+        // Get the children (not sure if this is less expensive than Find though?)
         foreach (Transform t in transform) {
             switch(t.gameObject.name) {
                 case panelName:
@@ -42,6 +42,8 @@ public class UIController : MonoBehaviour
 
     // Update score display
     public void UpdateScore(int score) {
+
+        // Show at least 7 digits
         scoreValue.text = score.ToString("D7");
     }
 

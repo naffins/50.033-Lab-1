@@ -103,7 +103,7 @@ public class PlayerController : ResettableStateControllerBase
     }
     void OnCollisionEnter2D(Collision2D other)
     {
-        // I think we can ignore IsPaused() checking here
+        if (IsPaused()) return;
 
         // If enter ground's collision box, enable jump and empty list of gombas jumped over
         if (other.gameObject.CompareTag(Utils.groundTag)) {
